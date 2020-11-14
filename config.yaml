@@ -1,0 +1,102 @@
+training:
+  n_train: 1
+
+env:
+    env_name: 'simple_spread'
+    env_obs:
+        - 17
+        - 17
+        - 17
+
+self_play:
+    episodes: 60000
+    exploration_episodes: 6000
+    exploration_stop_probability: 0.5
+    tolerance: 0.1
+    stop_update_freq: 10
+    test_freq: 100
+    test_episodes: 100
+    mode: "repeat"
+    shuffle: False
+    max_timestep_strategy: fixed
+    ma_window_length: 50
+    ma_multiplier: 4
+    ma_default_value: 4
+    ma_bias: 4
+    max_timestep: 30
+    self_play_gamma: 0.1
+    alternate: False
+    alternate_step: 100
+
+target_play:
+    exploration_episodes: 0
+    episodes: 0
+    shuffle: True
+    test_freq: 100
+    test_episodes: 100
+    max_timestep: 50
+
+teachers:
+    gamma: 0.99
+    tau: 0.01
+    lr_actor: 0.0001
+    lr_critic: 0.0001
+    weight_decay: 0.0001
+    batch_size: 64
+    noise: 0.05
+    noise_decay: 0.99999
+    subpolicies: 3
+    action_shape: 2
+    replay_buffer_size: 100000
+    replay_buffer_type: "per"
+    max_action: 1
+    min_action: -1
+    teacher: True
+
+learners:
+    gamma: 0.99
+    tau: 0.01
+    lr_actor: 0.0001
+    lr_critic: 0.0001
+    weight_decay: 0.0001
+    batch_size: 64
+    noise: 0.05
+    noise_decay: 0.99999
+    subpolicies: 3
+    action_shape: 2
+    replay_buffer_size: 100000
+    replay_buffer_type: "per"
+    max_action: 1
+    min_action: -1
+
+#stop:
+#  K: 4
+#  action_dim: 2
+#  beta: 1
+#  delta: 1
+#  eps_clip: 0.1
+#  epsilon: 0.1
+#  epsilon_decay: 0.999
+#  gamma: 0.99
+#  hidden_size: 64
+#  lr_actor: 0.001
+#  lr_critic: 0.001
+#  mode: CLIP
+#  weight_decay: 1.0e-05
+
+stop:
+    action_dim: 2
+    lr_actor: 0.0005
+    lr_critic: 0.0005
+    weight_decay: 0.00001
+    continuous: False
+    normalize_advantage: False
+    gamma: 0.99
+    tau: 0.95
+    batch_size: rollout
+    target_kl: 0.1
+    clip: 0.1
+    use_gae: False
+    K_policy: 4
+    K_value: 4
+    entropy_factor: 0.001
